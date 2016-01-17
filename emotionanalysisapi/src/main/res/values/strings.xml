@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">EmotionAnalysisAPI</string>
+    <string name="no_internet_connection">Check your internet connection!</string>
+</resources>
