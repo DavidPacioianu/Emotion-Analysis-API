@@ -7,16 +7,16 @@ import com.google.gson.JsonObject;
 import com.pixelcan.emotionanalysisapi.models.FaceAnalysis;
 import com.pixelcan.emotionanalysisapi.util.FileUtils;
 import com.pixelcan.emotionanalysisapi.util.NetworkUtils;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.RequestBody;
 
 import java.io.IOException;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 /**
@@ -77,7 +77,7 @@ public class EmotionRestClient {
         Call<FaceAnalysis[]> call = apiService.analyzePicture(subscriptionKey, requestBody);
         call.enqueue(new Callback<FaceAnalysis[]>() {
             @Override
-            public void onResponse(Response<FaceAnalysis[]> response, Retrofit retrofit) {
+            public void onResponse(Response<FaceAnalysis[]> response) {
                 if (response.isSuccess()) {
                     // request successful (status code 200, 201)
                     FaceAnalysis[] result = response.body();
@@ -110,7 +110,7 @@ public class EmotionRestClient {
         Call<FaceAnalysis[]> call = apiService.analyzePicture(subscriptionKey, requestBody);
         call.enqueue(new Callback<FaceAnalysis[]>() {
             @Override
-            public void onResponse(Response<FaceAnalysis[]> response, Retrofit retrofit) {
+            public void onResponse(Response<FaceAnalysis[]> response) {
                 if (response.isSuccess()) {
                     // request successful (status code 200, 201)
                     FaceAnalysis[] result = response.body();
