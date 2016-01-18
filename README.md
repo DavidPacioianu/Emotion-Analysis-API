@@ -21,7 +21,7 @@ You can get a free subscription key from https://www.projectoxford.ai/emotion
 ##Sample
 
 ```java
- EmotionRestClient.getInstance().detect(card.getImageUri(), new ResponseCallback() {
+ EmotionRestClient.getInstance().detect(<your uri or url>, new ResponseCallback() {
           @Override
           public void onError(String errorMessage) {
               Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
