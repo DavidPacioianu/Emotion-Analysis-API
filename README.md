@@ -2,6 +2,7 @@
  [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Emotion--Analysis--API-green.svg?style=true)](https://android-arsenal.com/details/1/3070)
 [![Platform](https://img.shields.io/badge/Platform-Android-green.svg)](http://developer.android.com/index.html) [![API](https://img.shields.io/badge/API-9%2B-brightgreen.svg)](https://android-arsenal.com/api?level=9)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/DavidPacioianu/Emotion-Analysis-API/master/LICENSE)
+
 Android Wrapper for the Microsoft Project Oxford Emotion API.
 
 #Download
