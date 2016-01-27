@@ -13,15 +13,11 @@ compile 'com.pacioianu.david:emotion-analysis-api:1.0.1'
 
 #Usage
 
-##Initialisation
-
 First, init EmotionAnalysis in your application
 ```java
   EmotionRestClient.init(context, <subscription_key>);
 ```
 You can get a free subscription key from https://www.projectoxford.ai/emotion
-
-##Sample
 
 ```java
  EmotionRestClient.getInstance().detect(<your uri or url>, new ResponseCallback() {
@@ -37,6 +33,33 @@ You can get a free subscription key from https://www.projectoxford.ai/emotion
       });
 ```
 
+<img src="http://i63.tinypic.com/nzkai9.png" alt="sample" title="sample" width="350" height="610" align="right" vspace="52" />
+
+##Sample
+
+Sample response for https://thenypost.files.wordpress.com/2014/02/trump.jpg
+```json
+[
+  {
+    "faceRectangle": {
+      "left": 523,
+      "top": 293,
+      "width": 522,
+      "height": 522
+    },
+    "scores": {
+      "anger": 0.231301255,
+      "contempt": 0.00228384347,
+      "disgust": 0.013675208,
+      "fear": 0.0000379959965,
+      "happiness": 0.000004979391,
+      "neutral": 0.582898065,
+      "sadness": 0.1897379,
+      "surprise": 0.0000607591355
+    }
+  }
+]
+```
 
 #Community
 
