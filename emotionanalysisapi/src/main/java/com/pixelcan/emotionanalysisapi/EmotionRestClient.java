@@ -54,23 +54,9 @@ public class EmotionRestClient {
         // Service setup
         apiService = retrofit.create(ApiService.class);
     }
-
-    public void detect(Uri uri, final ResponseCallback callback){
-        if (!NetworkUtils.hasInternetConnection(context)){
-            callback.onError(context.getString(R.string.no_internet_connection));
-            return;
-        }
-
-        // convert the image to bytes array
-        byte[] data;
-
-        try {
-            data = FileUtils.toBinary(uri);
-        } catch (Exception e) {
-            callback.onError(e.getMessage());
-            return;
-        }
-
+    
+    public void detect(byte[] data,final ResponseCallback callback){
+        
         RequestBody requestBody = RequestBody
                 .create(MediaType.parse("application/octet-stream"), data);
 
@@ -101,6 +87,34 @@ public class EmotionRestClient {
                 callback.onError(t.getMessage());
             }
         });
+    }
+    
+    public void detect(Bitmap bmp, final ResponseCallback callback){
+        if (!NetworkUtils.hasInternetConnection(context)){
+            callback.onError(context.getString(R.string.no_internet_connection));
+            return;
+        }
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] data = stream.toByteArray();
+        detect(data,callback);
+    }
+    public void detect(Uri uri, final ResponseCallback callback){
+        if (!NetworkUtils.hasInternetConnection(context)){
+            callback.onError(context.getString(R.string.no_internet_connection));
+            return;
+        }
+
+        // convert the image to bytes array
+        byte[] data;
+
+        try {
+            data = FileUtils.toBinary(uri);
+        } catch (Exception e) {
+            callback.onError(e.getMessage());
+            return;
+        }
+        detect(data,callback);
     }
 
     public void detect(String url, final ResponseCallback callback){
