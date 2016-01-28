@@ -1,6 +1,7 @@
 package com.pixelcan.emotionanalysisapi;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 import com.google.gson.JsonObject;
@@ -9,6 +10,7 @@ import com.pixelcan.emotionanalysisapi.util.FileUtils;
 import com.pixelcan.emotionanalysisapi.util.NetworkUtils;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -54,13 +56,18 @@ public class EmotionRestClient {
         // Service setup
         apiService = retrofit.create(ApiService.class);
     }
-    
-    public void detect(byte[] data,final ResponseCallback callback){
-        RequestBody requestBody = RequestBody
-                .create(MediaType.parse("application/octet-stream"), data);
 
-        Call<FaceAnalysis[]> call = apiService.analyzePicture(subscriptionKey, requestBody);
-        call.enqueue(new Callback<FaceAnalysis[]>() {
+    public Response<FaceAnalysis[]> detect(String url) throws IOException {
+        return createUrlCall(url).execute();
+    }
+
+    public void detect(String url, final ResponseCallback callback){
+        if (!NetworkUtils.hasInternetConnection(context)){
+            callback.onError(context.getString(R.string.no_internet_connection));
+            return;
+        }
+
+        createUrlCall(url).enqueue(new Callback<FaceAnalysis[]>() {
             @Override
             public void onResponse(Response<FaceAnalysis[]> response) {
                 if (response.isSuccess()) {
@@ -87,25 +94,24 @@ public class EmotionRestClient {
             }
         });
     }
-    
-    public void detect(Bitmap bmp, final ResponseCallback callback){
-        if (!NetworkUtils.hasInternetConnection(context)){
-            callback.onError(context.getString(R.string.no_internet_connection));
-            return;
-        }
-        
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] data = stream.toByteArray();
-        
-        detect(data,callback);
-    }
-    public void detect(Uri uri, final ResponseCallback callback){
-        if (!NetworkUtils.hasInternetConnection(context)){
-            callback.onError(context.getString(R.string.no_internet_connection));
-            return;
-        }
 
+    private Call<FaceAnalysis[]> createUrlCall(String url){
+        JsonObject requestBody = new JsonObject();
+        requestBody.addProperty("url", url);
+
+        Call<FaceAnalysis[]> call = apiService.analyzePicture(subscriptionKey, requestBody);
+
+        return call;
+    }
+
+    public Response<FaceAnalysis[]> detect(Uri uri) throws IOException, URISyntaxException {
+        // convert the image to bytes array
+        byte[] data = FileUtils.toBinary(uri);
+
+        return detect(data);
+    }
+
+    public void detect(Uri uri, final ResponseCallback callback){
         // convert the image to bytes array
         byte[] data;
 
@@ -115,15 +121,29 @@ public class EmotionRestClient {
             callback.onError(e.getMessage());
             return;
         }
+
         detect(data,callback);
     }
 
-    public void detect(String url, final ResponseCallback callback){
-        JsonObject requestBody = new JsonObject();
-        requestBody.addProperty("url", url);
+    public Response<FaceAnalysis[]> detect(Bitmap bitmap) throws IOException {
+        byte[] data = FileUtils.toBinary(bitmap);
 
-        Call<FaceAnalysis[]> call = apiService.analyzePicture(subscriptionKey, requestBody);
-        call.enqueue(new Callback<FaceAnalysis[]>() {
+        return detect(data);
+    }
+
+    public void detect(Bitmap bitmap, final ResponseCallback callback){
+        byte[] data = FileUtils.toBinary(bitmap);
+
+        detect(data,callback);
+    }
+
+    public void detect(byte[] data, final ResponseCallback callback){
+        if (!NetworkUtils.hasInternetConnection(context)){
+            callback.onError(context.getString(R.string.no_internet_connection));
+            return;
+        }
+
+        getOctetStreamCall(data).enqueue(new Callback<FaceAnalysis[]>() {
             @Override
             public void onResponse(Response<FaceAnalysis[]> response) {
                 if (response.isSuccess()) {
@@ -150,4 +170,18 @@ public class EmotionRestClient {
             }
         });
     }
+
+    public Response<FaceAnalysis[]> detect(byte[] data) throws IOException {
+        return getOctetStreamCall(data).execute();
+    }
+    
+    private Call<FaceAnalysis[]> getOctetStreamCall(byte[] data){
+        RequestBody requestBody = RequestBody
+                .create(MediaType.parse("application/octet-stream"), data);
+
+        Call<FaceAnalysis[]> call = apiService.analyzePicture(subscriptionKey, requestBody);
+
+        return call;
+    }
+
 }

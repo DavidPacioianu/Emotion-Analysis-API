@@ -3,7 +3,7 @@ package com.pixelcan.emotionanalysisapi;
 import com.pixelcan.emotionanalysisapi.models.FaceAnalysis;
 
 /**
- * Created by davidpacioianu on 1/12/16.
+ * Created by David Pacioianu on 1/12/16.
  */
 public interface ResponseCallback {
 

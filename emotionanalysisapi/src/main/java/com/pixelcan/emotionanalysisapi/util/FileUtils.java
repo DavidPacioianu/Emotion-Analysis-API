@@ -1,5 +1,6 @@
 package com.pixelcan.emotionanalysisapi.util;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 import java.io.ByteArrayOutputStream;
@@ -16,7 +17,7 @@ import java.net.URISyntaxException;
 public class FileUtils {
 
     public static byte[] toBinary(Uri uri) throws IOException, URISyntaxException {
-        // convert the image to bytes array
+        // convert the file to bytes array
         InputStream inputStream = new FileInputStream(new File(new URI(uri.toString())));
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] bytes = new byte[1024];
@@ -27,6 +28,16 @@ public class FileUtils {
         }
 
         byte[] data = byteArrayOutputStream.toByteArray();
+
+        return  data;
+    }
+
+    public static byte[] toBinary(Bitmap bitmap) {
+        // convert the bitmap to bytes array
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+        byte[] data = stream.toByteArray();
 
         return  data;
     }
