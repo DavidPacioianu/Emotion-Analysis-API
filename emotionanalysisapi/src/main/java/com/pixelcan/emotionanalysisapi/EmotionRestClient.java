@@ -56,7 +56,6 @@ public class EmotionRestClient {
     }
     
     public void detect(byte[] data,final ResponseCallback callback){
-        
         RequestBody requestBody = RequestBody
                 .create(MediaType.parse("application/octet-stream"), data);
 
@@ -94,9 +93,11 @@ public class EmotionRestClient {
             callback.onError(context.getString(R.string.no_internet_connection));
             return;
         }
+        
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] data = stream.toByteArray();
+        
         detect(data,callback);
     }
     public void detect(Uri uri, final ResponseCallback callback){
