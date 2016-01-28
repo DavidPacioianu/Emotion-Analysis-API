@@ -9,7 +9,7 @@ Android Wrapper for the Microsoft Project Oxford Emotion API.
 
 In your gradle file [ ![Download](https://api.bintray.com/packages/davidpacioianu/maven/emotion-analysis-api/images/download.svg) ](https://bintray.com/davidpacioianu/maven/emotion-analysis-api/_latestVersion)
 ```groovy
-compile 'com.pacioianu.david:emotion-analysis-api:1.0.1'
+compile 'com.pacioianu.david:emotion-analysis-api:1.1.0'
 ```
 
 #Usage
@@ -20,8 +20,9 @@ First, init EmotionAnalysis in your application
 ```
 You can get a free subscription key from https://www.projectoxford.ai/emotion
 
+Asynchronous:
 ```java
- EmotionRestClient.getInstance().detect(<your uri or url>, new ResponseCallback() {
+ EmotionRestClient.getInstance().detect(<your uri/url/bitmap>, new ResponseCallback() {
           @Override
           public void onError(String errorMessage) {
               Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
@@ -32,6 +33,11 @@ You can get a free subscription key from https://www.projectoxford.ai/emotion
               Toast.makeText(context, context.getString(R.string.successfully_analysed), Toast.LENGTH_LONG).show();
           }
       });
+```
+
+Synchronous:
+```java
+ EmotionRestClient.getInstance().detect(<your uri/url/bitmap>);
 ```
 
 <img src="http://i63.tinypic.com/nzkai9.png" alt="sample" title="sample" width="350" height="610" align="right" vspace="52" />
