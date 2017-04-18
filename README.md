@@ -73,8 +73,7 @@ Sample response for https://thenypost.files.wordpress.com/2014/02/trump.jpg
 
 Icon | Application
 ------------ | -------------
-<img src="https://lh3.googleusercontent.com/Jqkeew5ZWXvMNp9DeelI159XotPZi6oRQ00T5Oz2uvcYtLMRIBKryDK57zvDFPHO0w=w300-rw" width="48" height="48" /> | [Facelyse](https://play.google.com/store/apps/details?id=com.pixelcan.facelyse) <alt="width="40" height="40" />
-
+<img src="https://goo.gl/hS2KWA" width="48" height="48" /> | [Facelyse](https://play.google.com/store/apps/details?id=com.pixelcan.facelyse)
 ## Community
 
 Looking for contributors, feel free to fork !
