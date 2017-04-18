@@ -5,14 +5,14 @@
 
 Android Wrapper for the Microsoft Project Oxford Emotion API.
 
-##Download
+## Download
 
 In your gradle file [ ![Download](https://api.bintray.com/packages/davidpacioianu/maven/emotion-analysis-api/images/download.svg) ](https://bintray.com/davidpacioianu/maven/emotion-analysis-api/_latestVersion)
 ```groovy
 compile 'com.pacioianu.david:emotion-analysis-api:1.1.0'
 ```
 
-##Usage
+## Usage
 
 First, init EmotionAnalysis in your application
 ```java
@@ -42,7 +42,7 @@ Synchronous:
 
 <img src="http://i63.tinypic.com/nzkai9.png" alt="sample" title="sample" width="350" height="610" align="right" vspace="52" />
 
-##Sample
+## Sample
 
 Sample response for https://thenypost.files.wordpress.com/2014/02/trump.jpg
 ```json
@@ -68,27 +68,27 @@ Sample response for https://thenypost.files.wordpress.com/2014/02/trump.jpg
 ]
 ```
 
-##Apps using the Emotion API
+## Apps using the Emotion API
 (feel free to send me your project)
 
 Icon | Application
 ------------ | -------------
 <img src="https://lh3.googleusercontent.com/Jqkeew5ZWXvMNp9DeelI159XotPZi6oRQ00T5Oz2uvcYtLMRIBKryDK57zvDFPHO0w=w300-rw" width="48" height="48" /> | [Facelyse](https://play.google.com/store/apps/details?id=com.pixelcan.facelyse) <alt="width="40" height="40" />
 
-##Community
+## Community
 
 Looking for contributors, feel free to fork !
 
-##Dependencies
+## Dependencies
 
 - Retrofit 2.0 from Square: https://github.com/square/retrofit
 - GSON from Google: https://github.com/google/gson
 
-##Developed By
+## Developed By
 
 Author: David Pacioianu www.david.pacioianu.com/
 
-##License
+## License
 
     Copyright 2016 David Păcioianu
 
