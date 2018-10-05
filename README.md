@@ -18,7 +18,6 @@ First, init EmotionAnalysis in your application
 ```java
   EmotionRestClient.init(context, <subscription_key>);
 ```
-You can get a free subscription key from https://www.projectoxford.ai/emotion
 
 Asynchronous:
 ```java
@@ -40,11 +39,9 @@ Synchronous:
  EmotionRestClient.getInstance().detect(<your uri/url/bitmap>);
 ```
 
-<img src="http://i63.tinypic.com/nzkai9.png" alt="sample" title="sample" width="350" height="610" align="right" vspace="52" />
-
 ## Sample
 
-Sample response for https://thenypost.files.wordpress.com/2014/02/trump.jpg
+Sample response
 ```json
 [
   {
